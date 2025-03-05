@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/main :: layout(~{::title}, ~{::section})}">
+<head>
+  <title>Novo Paciente - Clínica Médica</title>
+</head>
+<body>
+<section>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Novo Paciente</h2>
+    <a th:href="@{/pacientes}" class="btn btn-secondary">
+      Voltar
+    </a>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <form th:action="@{/pacientes/salvar}" th:object="${paciente}" method="post">
+        <!-- Campo oculto para ID (usado em edições) -->
+        <input type="hidden" th:field="*{id}" />
+
+        <div class="mb-3">
+          <label for="nome" class="form-label">Nome</label>
+          <input type="text" class="form-control" id="nome" th:field="*{nome}" required>
+          <div class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">
+            Nome é obrigatório
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="cpf" class="form-label">CPF</label>
+          <input type="text" class="form-control" id="cpf" th:field="*{cpf}"
+                 maxlength="11" placeholder="Apenas números" required>
+          <div class="invalid-feedback" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}">
+            CPF inválido
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="idade" class="form-label">Idade</label>
+          <input type="number" class="form-control" id="idade" th:field="*{idade}" min="0" required>
+          <div class="invalid-feedback" th:if="${#fields.hasErrors('idade')}" th:errors="*{idade}">
+            Idade inválida
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" class="form-control" id="email" th:field="*{email}" required>
+          <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">
+            Email inválido
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Salvar</button>
+      </form>
+    </div>
+  </div>
+</section>
+</body><!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/main :: layout(~{::title}, ~{::section})}">
+<head>
+  <title>Consultas - Clínica Médica</title>
+</head>
+<body>
+<section>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Consultas</h2>
+    <a th:href="@{/consultas/nova}" class="btn btn-primary">
+      <i class="bi bi-plus-circle"></i> Nova Consulta
+    </a>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <div th:if="${#lists.isEmpty(consultas)}" class="alert alert-info">
+        Nenhuma consulta agendada.
+      </div>
+
+      <div th:unless="${#lists.isEmpty(consultas)}">
+        <table class="table table-striped">
+          <thead>
+          <tr>
+            <th>ID</th>
+            <th>Paciente</th>
+            <th>Médico</th>
+            <th>Data e Hora</th>
+            <th>Tipo de Consulta</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr th:each="consulta : ${consultas}">
+            <td th:text="${consulta.id}">1</td>
+            <td th:text="${consulta.paciente.nome}">Nome do Paciente</td>
+            <td th:text="${consulta.medico.nome}">Nome do Médico</td>
+            <td th:text="${#temporals.format(consulta.dataHora, 'dd/MM/yyyy HH:mm')}">01/01/2024 10:00</td>
+            <td th:text="${consulta.tipoConsulta}">Tipo de Consulta</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+</body>
+</html>
+</html>

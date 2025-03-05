@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/main :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Novo Médico - Clínica Médica</title>
+</head>
+<body>
+<section>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Novo Médico</h2>
+        <a th:href="@{/medicos}" class="btn btn-secondary">
+            Voltar
+        </a>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <form th:action="@{/medicos/salvar}" th:object="${medico}" method="post">
+                <!-- Campo oculto para ID (usado em edições) -->
+                <input type="hidden" th:field="*{id}" />
+
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome</label>
+                    <input type="text" class="form-control" id="nome" th:field="*{nome}" required>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}">
+                        Nome é obrigatório
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="especialidade" class="form-label">Especialidade</label>
+                    <input type="text" class="form-control" id="especialidade" th:field="*{especialidade}" required>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('especialidade')}" th:errors="*{especialidade}">
+                        Especialidade é obrigatória
+                    </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Salvar</button>
+            </form>
+        </div>
+    </div>
+</section>
+</body>
+</html>

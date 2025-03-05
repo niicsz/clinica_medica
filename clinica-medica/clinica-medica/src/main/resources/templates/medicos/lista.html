@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/main :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Médicos - Clínica Médica</title>
+</head>
+<body>
+<section>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Médicos</h2>
+        <a th:href="@{/medicos/novo}" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Novo Médico
+        </a>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div th:if="${#lists.isEmpty(medicos)}" class="alert alert-info">
+                Nenhum médico cadastrado.
+            </div>
+
+            <div th:unless="${#lists.isEmpty(medicos)}">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Especialidade</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="medico : ${medicos}">
+                        <td th:text="${medico.id}">1</td>
+                        <td th:text="${medico.nome}">Nome do Médico</td>
+                        <td th:text="${medico.especialidade}">Especialidade</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

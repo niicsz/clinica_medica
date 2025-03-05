@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/main :: layout(~{::title}, ~{::section})}">
+<head>
+    <title>Início - Clínica Médica</title>
+</head>
+<body>
+<section>
+    <div class="jumbotron bg-light p-5 rounded">
+        <h1 class="display-4">Bem-vindo à Clínica Médica</h1>
+        <p class="lead">Sistema de gerenciamento de clínica médica para cadastro de pacientes, médicos e agendamento de consultas.</p>
+        <hr class="my-4">
+        <p>Utilize o menu acima para navegar entre as funcionalidades do sistema.</p>
+
+        <div class="row mt-5">
+            <div class="col-md-3">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Usuários</h5>
+                        <p class="card-text">Gerencie os usuários do sistema</p>
+                        <a href="/usuarios" class="btn btn-primary">Acessar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Pacientes</h5>
+                        <p class="card-text">Cadastre e consulte pacientes</p>
+                        <a href="/pacientes" class="btn btn-primary">Acessar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Médicos</h5>
+                        <p class="card-text">Gerencie o cadastro de médicos</p>
+                        <a href="/medicos" class="btn btn-primary">Acessar</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card mb-4">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">Consultas</h5>
+                        <p class="card-text">Agende e gerencie consultas</p>
+                        <a href="/consultas" class="btn btn-primary">Acessar</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/main :: layout(~{::title}, ~{::section})}">
+<head>
+  <title>Nova Consulta - Clínica Médica</title>
+</head>
+<body>
+<section>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2>Nova Consulta</h2>
+    <a th:href="@{/consultas}" class="btn btn-secondary">
+      Voltar
+    </a>
+  </div>
+
+  <div class="card">
+    <div class="card-body">
+      <form th:action="@{/consultas/salvar}" th:object="${consulta}" method="post">
+        <!-- Campo oculto para ID (usado em edições) -->
+        <input type="hidden" th:field="*{id}" />
+
+        <div class="mb-3">
+          <label for="paciente" class="form-label">Paciente</label>
+          <select class="form-select" id="paciente" th:field="*{paciente}" required>
+            <option value="">Selecione um paciente</option>
+            <option th:each="pac : ${pacientes}"
+                    th:value="${pac.id}"
+                    th:text="${pac.nome + ' - ' + pac.cpf}">
+              Nome do Paciente - CPF
+            </option>
+          </select>
+          <div class="invalid-feedback" th:if="${#fields.hasErrors('paciente')}" th:errors="*{paciente}">
+            Paciente é obrigatório
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="medico" class="form-label">Médico</label>
+          <select class="form-select" id="medico" th:field="*{medico}" required>
+            <option value="">Selecione um médico</option>
+            <option th:each="med : ${medicos}"
+                    th:value="${med.id}"
+                    th:text="${med.nome + ' - ' + med.especialidade}">
+              Nome do Médico - Especialidade
+            </option>
+          </select>
+          <div class="invalid-feedback" th:if="${#fields.hasErrors('medico')}" th:errors="*{medico}">
+            Médico é obrigatório
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="dataHora" class="form-label">Data e Hora</label>
+          <input type="datetime-local" class="form-control" id="dataHora" th:field="*{dataHora}" required>
+          <div class="invalid-feedback" th:if="${#fields.hasErrors('dataHora')}" th:errors="*{dataHora}">
+            Data e hora são obrigatórias
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="tipoConsulta" class="form-label">Tipo de Consulta</label>
+          <select class="form-select" id="tipoConsulta" th:field="*{tipoConsulta}" required>
+            <option value="">Selecione o tipo de consulta</option>
+            <option value="Consulta Inicial">Consulta Inicial</option>
+            <option value="Retorno">Retorno</option>
+            <option value="Exame">Exame</option>
+            <option value="Procedimento">Procedimento</option>
+          </select>
+          <div class="invalid-feedback" th:if="${#fields.hasErrors('tipoConsulta')}" th:errors="*{tipoConsulta}">
+            Tipo de consulta é obrigatório
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Agendar Consulta</button>
+      </form>
+    </div>
+  </div>
+</section>
+</body>
+</html>
