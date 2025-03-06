@@ -6,7 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title th:text="${title}">Clínica Médica</title>
 
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="/css/styles.css" rel="stylesheet">
 
     <style>
         .navbar-brand {
@@ -34,19 +39,19 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="/"><i class="bi bi-house-fill"></i> Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/usuarios">Usuários</a>
+                    <a class="nav-link" href="/usuarios"><i class="bi bi-people-fill"></i> Usuários</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/pacientes">Pacientes</a>
+                    <a class="nav-link" href="/pacientes"><i class="bi bi-person-fill"></i> Pacientes</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/medicos">Médicos</a>
+                    <a class="nav-link" href="/medicos"><i class="bi bi-hospital-fill"></i> Médicos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/consultas">Consultas</a>
+                    <a class="nav-link" href="/consultas"><i class="bi bi-calendar-check-fill"></i> Consultas</a>
                 </li>
             </ul>
         </div>
@@ -79,6 +84,49 @@
     </div>
 </footer>
 
+<!-- Bootstrap JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<!-- Custom JavaScript -->
+<script src="/css/js/scripts.js"></script>
+
+<!-- Modal de Confirmação de Exclusão -->
+<div class="modal fade" id="confirmDeleteModal" tabindex="-1" aria-labelledby="confirmDeleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header bg-danger text-white">
+                <h5 class="modal-title" id="confirmDeleteModalLabel">Confirmar Exclusão</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Tem certeza que deseja excluir este item?</p>
+                <p class="text-danger"><strong>Esta ação não pode ser desfeita.</strong></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                <a href="#" id="confirmDeleteBtn" class="btn btn-danger">Excluir</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const tooltipTriggerList = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+        [...tooltipTriggerList].map(tooltipTriggerEl => new bootstrap.Tooltip(tooltipTriggerEl));
+
+        const deleteButtons = document.querySelectorAll('.btn-delete');
+        const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+        const confirmDeleteModal = new bootstrap.Modal(document.getElementById('confirmDeleteModal'));
+
+        deleteButtons.forEach(function(button) {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                const deleteUrl = this.getAttribute('href');
+                confirmDeleteBtn.setAttribute('href', deleteUrl);
+                confirmDeleteModal.show();
+            });
+        });
+    });
+</script>
 </body>
 </html>

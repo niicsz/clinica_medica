@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -48,5 +45,26 @@ public class WebUsuarioController {
             attributes.addFlashAttribute("mensagemErro", "Erro ao cadastrar usuário: " + e.getMessage());
             return "redirect:/usuarios/novo";
         }
+    }
+
+    @GetMapping("/editar/{id}")
+    public String formEditarUsuario(@PathVariable Long id, Model model) {
+        Usuario usuario = usuarioService.buscarUsuarioPorId(id);
+        if (usuario == null) {
+            return "redirect:/usuarios";
+        }
+        model.addAttribute("usuario", usuario);
+        return "usuarios/form";
+    }
+
+    @GetMapping("/excluir/{id}")
+    public String excluirUsuario(@PathVariable Long id, RedirectAttributes attributes) {
+        try {
+            usuarioService.excluirUsuario(id);
+            attributes.addFlashAttribute("mensagem", "Usuário excluído com sucesso!");
+        } catch (Exception e) {
+            attributes.addFlashAttribute("mensagemErro", "Erro ao excluir usuário: " + e.getMessage());
+        }
+        return "redirect:/usuarios";
     }
 }

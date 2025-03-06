@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -61,5 +58,28 @@ public class WebConsultaController {
             attributes.addFlashAttribute("mensagemErro", "Erro ao agendar consulta: " + e.getMessage());
             return "redirect:/consultas/nova";
         }
+    }
+
+    @GetMapping("/editar/{id}")
+    public String formEditarConsulta(@PathVariable Long id, Model model) {
+        Consulta consulta = consultaService.buscarConsultaPorId(id);
+        if (consulta == null) {
+            return "redirect:/consultas";
+        }
+        model.addAttribute("consulta", consulta);
+        model.addAttribute("pacientes", pacienteService.listarTodosPacientes());
+        model.addAttribute("medicos", medicoService.listarTodosMedicos());
+        return "consultas/form";
+    }
+
+    @GetMapping("/excluir/{id}")
+    public String excluirConsulta(@PathVariable Long id, RedirectAttributes attributes) {
+        try {
+            consultaService.excluirConsulta(id);
+            attributes.addFlashAttribute("mensagem", "Consulta excluída com sucesso!");
+        } catch (Exception e) {
+            attributes.addFlashAttribute("mensagemErro", "Erro ao excluir consulta: " + e.getMessage());
+        }
+        return "redirect:/consultas";
     }
 }

@@ -1,6 +1,5 @@
 package com.example.clinica_medica.entities;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
@@ -19,12 +18,12 @@ public class Consulta {
     private Long id;
 
     @NotNull(message = "Paciente é obrigatório")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "paciente_id", nullable = false)
     private Paciente paciente;
 
     @NotNull(message = "Médico é obrigatório")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "medico_id", nullable = false)
     private Medico medico;
 

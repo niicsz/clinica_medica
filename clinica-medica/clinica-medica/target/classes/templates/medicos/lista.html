@@ -26,6 +26,7 @@
                         <th>ID</th>
                         <th>Nome</th>
                         <th>Especialidade</th>
+                        <th>Ações</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -33,6 +34,20 @@
                         <td th:text="${medico.id}">1</td>
                         <td th:text="${medico.nome}">Nome do Médico</td>
                         <td th:text="${medico.especialidade}">Especialidade</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a th:href="@{/medicos/editar/{id}(id=${medico.id})}"
+                                   class="btn btn-sm btn-warning" data-bs-toggle="tooltip"
+                                   title="Editar">
+                                    <i class="bi bi-pencil-fill"></i> Editar
+                                </a>
+                                <a th:href="@{/medicos/excluir/{id}(id=${medico.id})}"
+                                   class="btn btn-sm btn-danger ms-1 btn-delete"
+                                   data-bs-toggle="tooltip" title="Excluir">
+                                    <i class="bi bi-trash-fill"></i> Excluir
+                                </a>
+                            </div>
+                        </td>
                     </tr>
                     </tbody>
                 </table>

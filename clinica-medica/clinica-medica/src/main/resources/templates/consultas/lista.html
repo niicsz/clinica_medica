@@ -1,10 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br" xmlns:th="http://www.thymeleaf.org"
+      th:replace="~{layout/main :: layout(~{::title}, ~{::section})}">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Consultas - Clínica Médica</title>
 </head>
 <body>
+<section>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2>Consultas</h2>
+        <a th:href="@{/consultas/nova}" class="btn btn-primary">
+            <i class="bi bi-plus-circle"></i> Nova Consulta
+        </a>
+    </div>
 
+    <div class="card">
+        <div class="card-body">
+            <div th:if="${#lists.isEmpty(consultas)}" class="alert alert-info">
+                Nenhuma consulta agendada.
+            </div>
+
+            <div th:unless="${#lists.isEmpty(consultas)}">
+                <table class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Paciente</th>
+                        <th>Médico</th>
+                        <th>Data e Hora</th>
+                        <th>Tipo de Consulta</th>
+                        <th>Ações</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="consulta : ${consultas}">
+                        <td th:text="${consulta.id}">1</td>
+                        <td th:text="${consulta.paciente.nome}">Nome do Paciente</td>
+                        <td th:text="${consulta.medico.nome}">Nome do Médico</td>
+                        <td th:text="${#temporals.format(consulta.dataHora, 'dd/MM/yyyy HH:mm')}">01/01/2024 10:00</td>
+                        <td th:text="${consulta.tipoConsulta}">Tipo de Consulta</td>
+                        <td>
+                            <div class="btn-group" role="group">
+                                <a th:href="@{/consultas/editar/{id}(id=${consulta.id})}"
+                                   class="btn btn-sm btn-warning" data-bs-toggle="tooltip"
+                                   title="Editar">
+                                    <i class="bi bi-pencil-fill"></i> Editar
+                                </a>
+                                <a th:href="@{/consultas/excluir/{id}(id=${consulta.id})}"
+                                   class="btn btn-sm btn-danger ms-1 btn-delete"
+                                   data-bs-toggle="tooltip" title="Excluir">
+                                    <i class="bi bi-trash-fill"></i> Excluir
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
 </body>
 </html>
