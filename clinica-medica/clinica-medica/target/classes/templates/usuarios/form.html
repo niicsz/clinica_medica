@@ -27,7 +27,7 @@
         </div>
 
         <div class="mb-3">
-          <label for="cpf" class="form-label">CPF</label>
+          <label for="cpf" class="form-label">CPF apenas números</label>
           <input type="text" class="form-control" id="cpf" th:field="*{cpf}"
                  maxlength="11" placeholder="Apenas números" required>
           <div class="invalid-feedback" th:if="${#fields.hasErrors('cpf')}" th:errors="*{cpf}">
