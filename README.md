@@ -1,178 +1,136 @@
-# Clínica Médica - Sistema de Gerenciamento
+# Sistema de Gerenciamento de Clínica Médica
 
-Sistema web para gerenciamento de uma clínica médica desenvolvido com Spring Boot, permitindo o cadastro de usuários, pacientes, médicos e agendamento de consultas.
+Um sistema completo para gerenciamento de clínicas médicas, com funcionalidades para cadastro de médicos, pacientes, usuários e agendamento de consultas.
 
-## 📋 Funcionalidades
+## Funcionalidades
 
-- **Gerenciamento de Usuários**: Cadastro e listagem de usuários do sistema
-- **Gerenciamento de Pacientes**: Cadastro e listagem de pacientes
-- **Gerenciamento de Médicos**: Cadastro e listagem de médicos e suas especialidades
-- **Agendamento de Consultas**: Agendamento e listagem de consultas médicas
+- **Gerenciamento de Usuários**: Cadastro, edição e exclusão de usuários do sistema
+- **Gerenciamento de Pacientes**: Cadastro, consulta, edição e exclusão de pacientes
+- **Gerenciamento de Médicos**: Cadastro, edição e exclusão de médicos e suas especialidades
+- **Agendamento de Consultas**: Agendamento, edição e cancelamento de consultas médicas
+- **Validação de Dados**: Validação completa em todos os formulários (CPF, e-mail, datas, etc.)
+- **API REST**: Endpoints REST para integração com outros sistemas
 
-## 🛠️ Tecnologias Utilizadas
+## Tecnologias Utilizadas
 
-- **Java 17**
-- **Spring Boot 3.4.3**
-- **Spring Data JPA**: Para persistência de dados
-- **Thymeleaf**: Para templates HTML
-- **Bootstrap 5**: Para interface responsiva
-- **H2 Database**: Banco de dados em memória para desenvolvimento
-- **Lombok**: Para redução de código boilerplate
-- **Jakarta Validation**: Para validação de dados
+- **Backend**:
+  - Java 17
+  - Spring Boot 3.4.3
+  - Spring Data JPA
+  - Spring Validation
+  - H2 Database (para ambiente de desenvolvimento)
+  - Lombok
+  
+- **Frontend**:
+  - Thymeleaf
+  - Bootstrap 5
+  - Bootstrap Icons
+  - HTML5, CSS3, JavaScript
 
-## 📦 Estrutura do Projeto
+## Pré-requisitos
 
-```
-clinica-medica/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── com/
-│   │   │       └── example/
-│   │   │           └── clinica_medica/
-│   │   │               ├── ClinicaMedicaApplication.java
-│   │   │               ├── config/
-│   │   │               │   └── TestDataConfig.java
-│   │   │               ├── controllers/
-│   │   │               │   ├── api/
-│   │   │               │   │   └── ClinicaMedicaController.java
-│   │   │               │   └── web/
-│   │   │               │       ├── HomeController.java
-│   │   │               │       ├── WebUsuarioController.java
-│   │   │               │       ├── WebPacienteController.java
-│   │   │               │       ├── WebMedicoController.java
-│   │   │               │       └── WebConsultaController.java
-│   │   │               ├── entities/
-│   │   │               │   ├── Usuario.java
-│   │   │               │   ├── Paciente.java
-│   │   │               │   ├── Medico.java
-│   │   │               │   └── Consulta.java
-│   │   │               ├── repositories/
-│   │   │               │   ├── UsuarioRepository.java
-│   │   │               │   ├── PacienteRepository.java
-│   │   │               │   ├── MedicoRepository.java
-│   │   │               │   └── ConsultaRepository.java
-│   │   │               └── services/
-│   │   │                   ├── UsuarioService.java
-│   │   │                   ├── PacienteService.java
-│   │   │                   ├── MedicoService.java
-│   │   │                   └── ConsultaService.java
-│   │   └── resources/
-│   │       ├── application.properties
-│   │       ├── static/
-│   │       │   ├── css/
-│   │       │   │   └── styles.css
-│   │       │   └── js/
-│   │       │       └── scripts.js
-│   │       └── templates/
-│   │           ├── index.html
-│   │           ├── layout/
-│   │           │   └── main.html
-│   │           ├── usuarios/
-│   │           │   ├── lista.html
-│   │           │   └── form.html
-│   │           ├── pacientes/
-│   │           │   ├── lista.html
-│   │           │   └── form.html
-│   │           ├── medicos/
-│   │           │   ├── lista.html
-│   │           │   └── form.html
-│   │           └── consultas/
-│   │               ├── lista.html
-│   │               └── form.html
-│   └── test/
-│       └── java/
-│           └── com/
-│               └── example/
-│                   └── clinica_medica/
-│                       └── ClinicaMedicaApplicationTests.java
-└── pom.xml
-```
-
-## 🚀 Instalação e Execução
-
-### Pré-requisitos
-
-- Java 17 ou superior
+- Java Development Kit (JDK) 17 ou superior
 - Maven 3.6 ou superior
 
-### Passos para execução
+## Como Executar
 
-1. **Clone o repositório**
+1. Clone o repositório:
    ```bash
    git clone https://github.com/niicsz/clinica_medica.git
-   cd clinica_medica
+   cd clinica-medica
    ```
 
-2. **Compile o projeto**
+2. Execute a aplicação:
    ```bash
-   mvn clean install
+   ./mvnw spring-boot:run
    ```
 
-3. **Execute a aplicação**
-   ```bash
-   mvn spring-boot:run
+3. Acesse pelo navegador:
+   ```
+   http://localhost:8080
    ```
 
-4. **Acesse a aplicação**
-   - Interface web: http://localhost:8080
-   - Console H2: http://localhost:8080/h2-console
-     - JDBC URL: `jdbc:h2:mem:clinicamedica`
-     - Usuário: `sa`
-     - Senha: 
+4. Para acessar o console do banco de dados H2:
+   ```
+   http://localhost:8080/h2-console
+   
+   JDBC URL: jdbc:h2:mem:clinicamedica
+   Username: sa
+   Password: (deixe em branco)
+   ```
 
-## 🔀 API REST
+## Estrutura do Projeto
 
-A aplicação também disponibiliza uma API REST para integração com outros sistemas:
+```
+src/main/java/com/example/clinica_medica/
+├── config/           # Configurações do Spring Boot e perfis
+├── controller/       # Controladores REST e Web
+│   ├── api/          # Endpoints da API REST
+│   └── web/          # Controladores Web (Thymeleaf)
+├── entities/         # Entidades JPA
+├── exceptions/       # Tratamento de exceções
+├── repositories/     # Repositórios JPA
+└── services/         # Camada de serviços
 
-### Endpoints de Usuários
+src/main/resources/
+├── static/           # Recursos estáticos (CSS, JavaScript)
+├── templates/        # Templates Thymeleaf
+│   ├── consultas/    # Templates de consultas
+│   ├── layout/       # Templates de layout
+│   ├── medicos/      # Templates de médicos
+│   ├── pacientes/    # Templates de pacientes
+│   └── usuarios/     # Templates de usuários
+└── application.properties  # Configurações da aplicação
+```
 
-- **GET** `/api/usuarios`: Lista todos os usuários
-- **POST** `/api/usuarios`: Cadastra um novo usuário
+## Perfis da Aplicação
 
-### Endpoints de Pacientes
+- **test**: Perfil de desenvolvimento com banco de dados H2 em memória e dados de teste carregados automaticamente
 
-- **GET** `/api/pacientes`: Lista todos os pacientes
-- **GET** `/api/pacientes/cpf/{cpf}`: Busca paciente por CPF
-- **POST** `/api/pacientes`: Cadastra um novo paciente
+## Entidades
 
-### Endpoints de Médicos
+- **Usuario**: Usuários do sistema (administradores, recepcionistas, etc.)
+- **Paciente**: Pacientes da clínica
+- **Medico**: Médicos da clínica e suas especialidades
+- **Consulta**: Agendamento de consultas entre pacientes e médicos
 
-- **GET** `/api/medicos`: Lista todos os médicos
-- **GET** `/api/medicos/{id}`: Busca médico por ID
-- **POST** `/api/medicos`: Cadastra um novo médico
+## API REST
 
-### Endpoints de Consultas
+A API REST está disponível no contexto `/api` e oferece endpoints para todas as entidades:
 
-- **GET** `/api/consultas`: Lista todas as consultas
-- **POST** `/api/consultas`: Agenda uma nova consulta
+### Usuários
+- `GET /api/usuarios` - Lista todos os usuários
+- `GET /api/usuarios/{id}` - Busca usuário por ID
+- `POST /api/usuarios` - Cria novo usuário
+- `PUT /api/usuarios/{id}` - Atualiza um usuário existente
+- `DELETE /api/usuarios/{id}` - Remove um usuário
 
-## 🔧 Configurações Adicionais
+### Pacientes
+- `GET /api/pacientes` - Lista todos os pacientes
+- `GET /api/pacientes/{id}` - Busca paciente por ID
+- `GET /api/pacientes/cpf/{cpf}` - Busca paciente por CPF
+- `POST /api/pacientes` - Cria novo paciente
+- `PUT /api/pacientes/{id}` - Atualiza um paciente existente
+- `DELETE /api/pacientes/{id}` - Remove um paciente
 
-O arquivo `application.properties` contém as configurações da aplicação:
+### Médicos
+- `GET /api/medicos` - Lista todos os médicos
+- `GET /api/medicos/{id}` - Busca médico por ID
+- `POST /api/medicos` - Cria novo médico
+- `PUT /api/medicos/{id}` - Atualiza um médico existente
+- `DELETE /api/medicos/{id}` - Remove um médico
 
-```properties
-# H2 Database Configuration
-spring.datasource.url=jdbc:h2:mem:clinicamedica
-spring.datasource.driverClassName=org.h2.Driver
-spring.datasource.username=sa
-spring.datasource.password=
+### Consultas
+- `GET /api/consultas` - Lista todas as consultas
+- `GET /api/consultas/{id}` - Busca consulta por ID
+- `POST /api/consultas` - Agenda nova consulta
+- `PUT /api/consultas/{id}` - Atualiza uma consulta existente
+- `DELETE /api/consultas/{id}` - Cancela uma consulta
 
-# H2 Console
-spring.h2.console.enabled=true
-spring.h2.console.path=/h2-console
+## Contribuição
 
-# Hibernate DDL Auto
-spring.jpa.hibernate.ddl-auto=create-drop
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.format_sql=true
-
-# Logging
-logging.level.org.springframework.web=INFO
-logging.level.org.hibernate=ERROR
-
-# Server Port
-server.port=8080
-
-# Ative o perfil de teste
-spring.profiles.active=test
+1. Faça um fork do projeto
+2. Crie uma branch para sua feature (`git checkout -b feature/nova-feature`)
+3. Faça commit das suas mudanças (`git commit -am 'Adiciona nova feature'`)
+4. Faça push para a branch (`git push origin feature/nova-feature`)
+5. Crie um Pull Request
