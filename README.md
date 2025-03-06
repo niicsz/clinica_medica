@@ -12,7 +12,7 @@ Sistema web para gerenciamento de uma clínica médica desenvolvido com Spring B
 ## 🛠️ Tecnologias Utilizadas
 
 - **Java 17**
-- **Spring Boot 3.2.2**
+- **Spring Boot 3.4.3**
 - **Spring Data JPA**: Para persistência de dados
 - **Thymeleaf**: Para templates HTML
 - **Bootstrap 5**: Para interface responsiva
@@ -29,7 +29,7 @@ clinica-medica/
 │   │   ├── java/
 │   │   │   └── com/
 │   │   │       └── example/
-│   │   │           └── clinicamedica/
+│   │   │           └── clinica_medica/
 │   │   │               ├── ClinicaMedicaApplication.java
 │   │   │               ├── config/
 │   │   │               │   └── TestDataConfig.java
@@ -84,7 +84,7 @@ clinica-medica/
 │       └── java/
 │           └── com/
 │               └── example/
-│                   └── clinicamedica/
+│                   └── clinica_medica/
 │                       └── ClinicaMedicaApplicationTests.java
 └── pom.xml
 ```
@@ -100,8 +100,8 @@ clinica-medica/
 
 1. **Clone o repositório**
    ```bash
-   git clone https://github.com/seu-usuario/clinica-medica.git
-   cd clinica-medica
+   git clone https://github.com/niicsz/clinica_medica.git
+   cd clinica_medica
    ```
 
 2. **Compile o projeto**
@@ -119,7 +119,7 @@ clinica-medica/
    - Console H2: http://localhost:8080/h2-console
      - JDBC URL: `jdbc:h2:mem:clinicamedica`
      - Usuário: `sa`
-     - Senha: ``
+     - Senha: 
 
 ## 🔀 API REST
 
@@ -146,15 +146,6 @@ A aplicação também disponibiliza uma API REST para integração com outros si
 
 - **GET** `/api/consultas`: Lista todas as consultas
 - **POST** `/api/consultas`: Agenda uma nova consulta
-
-## 👥 Contribuição
-
-1. Faça um Fork do projeto
-2. Crie uma Branch para sua Feature (`git checkout -b feature/AmazingFeature`)
-3. Adicione suas mudanças (`git add .`)
-4. Comite suas mudanças (`git commit -m 'Add some AmazingFeature'`)
-5. Faça o Push da Branch (`git push origin feature/AmazingFeature`)
-6. Abra um Pull Request
 
 ## 🔧 Configurações Adicionais
 
@@ -185,4 +176,3 @@ server.port=8080
 
 # Ative o perfil de teste
 spring.profiles.active=test
-```****
